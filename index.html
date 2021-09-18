@@ -269,7 +269,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E5%B8%B8%E7%94%A8%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -283,7 +283,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/09/11/%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">总结</a>
+            <a href="/2021/09/11/%E5%B8%B8%E7%94%A8%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">常用总结</a>
         </h2>
 
         <div class="post-meta">
@@ -300,7 +300,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-14 10:51:37" itemprop="dateModified" datetime="2021-09-14T10:51:37+08:00">2021-09-14</time>
+                <time title="Modified: 2021-09-18 14:29:02" itemprop="dateModified" datetime="2021-09-18T14:29:02+08:00">2021-09-18</time>
               </span>
 
           <br>
@@ -309,7 +309,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>38</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -328,7 +328,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="日常笔记，不定期更新"><a href="#日常笔记，不定期更新" class="headerlink" title="日常笔记，不定期更新"></a>日常笔记，不定期更新</h1><h2 id="1-HashMap"><a href="#1-HashMap" class="headerlink" title="1.HashMap"></a>1.HashMap</h2><h2 id="2-ArrayList"><a href="#2-ArrayList" class="headerlink" title="2.ArrayList"></a>2.ArrayList</h2><h2 id="3-链表"><a href="#3-链表" class="headerlink" title="3.链表"></a>3.链表</h2><h2 id="4-堆栈"><a href="#4-堆栈" class="headerlink" title="4.堆栈"></a>4.堆栈</h2>
+          <h2 id="1-HashMap"><a href="#1-HashMap" class="headerlink" title="1.HashMap"></a>1.HashMap</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>HashMap是由数组和链表组成的，主干是Enery数组，每个Enery包含一个key-vlaue键值对。</p>
+<p>链表的存在主要是为了解决<strong>哈希冲突</strong>，如果多次操作经过哈希算法后落到同一个Entry的节点，那么就会在该节点形成链表。<strong>jdk8采用数组+链表+红黑树的数据结构，而jdk7之前采用数组+链表的数据结构。</strong></p>
+<p>如果定位到的Enrty节点（数组位置）不含链表，那么查找、添加操作就很快，仅需一次寻址即可。</p>
+<p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度仍然我**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
+<p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
+<h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a><strong>JDK7</strong></h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据结构：数组加链表</span><br><span class="line"></span><br><span class="line">数据节点：他的数据节点是一个<span class="meta">Entry</span>节点</span><br><span class="line"></span><br><span class="line">数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？</span><br><span class="line">他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的<span class="meta">Entry</span>进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次<span class="meta">get</span>的时候出现一个死循环的情况。</span><br></pre></td></tr></table></figure>
+
+<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a><strong>JDK8</strong></h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</span><br><span class="line"></span><br><span class="line">数据节点：原本的Entry节点也变成了一个<span class="keyword">Node</span><span class="title">节点</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">数据插入方式：1</span>.<span class="number">8</span>数据插入的过程使用的是尾插法：尾插法线程安全吗？</span><br><span class="line">尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a><strong>扩容机制</strong></h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果我们没有设置他的<span class="built_in">capacity</span>(容量)，他的默认初始化容量是<span class="number">16</span>，负载因子是<span class="number">0.75</span>，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</span><br></pre></td></tr></table></figure>
+
+<h3 id="怎么保证HashMap线程安全的"><a href="#怎么保证HashMap线程安全的" class="headerlink" title="怎么保证HashMap线程安全的"></a><strong>怎么保证HashMap线程安全的</strong></h3><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我一般会使用<span class="function"><span class="title">ConcurrentHashMap</span>(肯凯润特)这种线程安全的一个集合容器</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>线程安全的还有像HashTable，或者说给他加Synchronized(sei可弱耐ri的)，或者lock，或者用collection.Synchronized都可以对他进行一个同步的操作，为什么选择了ConcurrentHashMap？</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首先，ConcurrentHashMap他的并发度是更高的，我们知道就像普通的HashTable是直接对里面的方法加了一个对象锁，因为<span class="keyword">Synchronized</span>的机制，同一时刻只能有一个线程操作他，其他线程阻塞或者轮询等待，效率是比较低的，但是<span class="number">1.8</span>之后的ConcurrentHashMap同样变成了一个数组+链表+红黑树的一个结构，他采用了分段锁的技术，就是给容器上了很多的锁，然后每一把锁控制容器中的一部分数据，这样多个线程访问容器里不同部分的数据时，线程之间就不会发生锁的竞争，这样就可以有效的提高并发的访问效率</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-ConcurrentHashMap"><a href="#2-ConcurrentHashMap" class="headerlink" title="2.ConcurrentHashMap"></a>2.ConcurrentHashMap</h2><h2 id="3-ArrayList"><a href="#3-ArrayList" class="headerlink" title="3.ArrayList"></a>3.ArrayList</h2><h2 id="4-链表"><a href="#4-链表" class="headerlink" title="4.链表"></a>4.链表</h2><h2 id="5-堆栈"><a href="#5-堆栈" class="headerlink" title="5.堆栈"></a>5.堆栈</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aprild">
+      <meta itemprop="description" content="programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狂人日记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/18/HashMap/" class="post-title-link" itemprop="url">HashMap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-18 14:30:57 / Modified: 14:36:54" itemprop="dateCreated datePublished" datetime="2021-09-18T14:30:57+08:00">2021-09-18</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>946</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>HashMap是由数组和链表组成的，主干是Enery数组，每个Enery包含一个key-vlaue键值对。</p>
+<p>链表的存在主要是为了解决<strong>哈希冲突</strong>，如果多次操作经过哈希算法后落到同一个Entry的节点，那么就会在该节点形成链表。<strong>jdk8采用数组+链表+红黑树的数据结构，而jdk7之前采用数组+链表的数据结构。</strong></p>
+<p>如果定位到的Enrty节点（数组位置）不含链表，那么查找、添加操作就很快，仅需一次寻址即可。</p>
+<p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度仍然我**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
+<p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
+<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a>JDK8</h3><p>数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</p>
+<p>数据节点：原本的Entry节点也变成了一个Node节点</p>
+<p>数据插入方式：1.8数据插入的过程使用的是尾插法：尾插法线程安全吗？<br>尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</p>
+<h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a>JDK7</h3><p>数据结构：数组加链表</p>
+<p>数据节点：他的数据节点是一个Entry节点</p>
+<p>数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？<br>他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的Entry进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次get的时候出现一个死循环的情况。</p>
+<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><p>如果我们没有设置他的capacity(容量)，他的默认初始化容量是16，负载因子是0.75，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</p>
+
       
     </div>
 
@@ -408,7 +508,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -456,12 +556,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">0k</span>
+    <span title="Symbols count total">3k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1 mins.</span>
+    <span title="Reading time total">2 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>

@@ -22,12 +22,12 @@
 
   <meta name="description" content="programmer">
 <meta property="og:type" content="website">
-<meta property="og:title" content="狂人日记">
+<meta property="og:title" content="甘文崔">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="狂人日记">
+<meta property="og:site_name" content="甘文崔">
 <meta property="og:description" content="programmer">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="Aprild">
+<meta property="article:author" content="aprild">
 <meta property="article:tag" content="冲！">
 <meta name="twitter:card" content="summary">
 
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>狂人日记</title>
+  <title>甘文崔</title>
   
 
 
@@ -95,10 +95,9 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">狂人日记</h1>
+      <h1 class="site-title">甘文崔</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">是来买瓜的吗？15斤2元</p>
   </div>
 
   <div class="site-nav-right">
@@ -165,16 +164,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Aprild">
+      <meta itemprop="name" content="aprild">
       <meta itemprop="description" content="programmer">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂人日记">
+      <meta itemprop="name" content="甘文崔">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/18/HashMap/" class="post-title-link" itemprop="url">HashMap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-18 14:30:57 / Modified: 14:43:54" itemprop="dateCreated datePublished" datetime="2021-09-18T14:30:57+08:00">2021-09-18</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>944</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>HashMap是由数组和链表组成的，主干是Enery数组，每个Enery包含一个key-vlaue键值对。</p>
+<p>链表的存在主要是为了解决<strong>哈希冲突</strong>，如果多次操作经过哈希算法后落到同一个Entry的节点，那么就会在该节点形成链表。<strong>jdk8采用数组+链表+红黑树的数据结构，而jdk7之前采用数组+链表的数据结构。</strong></p>
+<p>如果定位到的Enrty节点（数组位置）不含链表，那么查找、添加操作就很快，仅需一次寻址即可。</p>
+<p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度为**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
+<p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
+<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a>JDK8</h3><p>数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</p>
+<p>数据节点：原本的Entry节点也变成了一个Node节点</p>
+<p>数据插入方式：1.8数据插入的过程使用的是尾插法：尾插法线程安全吗？<br>尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</p>
+<h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a>JDK7</h3><p>数据结构：数组加链表</p>
+<p>数据节点：他的数据节点是一个Entry节点</p>
+<p>数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？<br>他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的Entry进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次get的时候出现一个死循环的情况。</p>
+<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><p>如果我们没有设置他的capacity(容量)，他的默认初始化容量是16，负载因子是0.75，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="aprild">
+      <meta itemprop="description" content="programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甘文崔">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -196,7 +279,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-17 16:23:32" itemprop="dateModified" datetime="2021-09-17T16:23:32+08:00">2021-09-17</time>
+                <time title="Modified: 2021-09-18 14:43:26" itemprop="dateModified" datetime="2021-09-18T14:43:26+08:00">2021-09-18</time>
               </span>
 
           <br>
@@ -273,12 +356,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Aprild">
+      <meta itemprop="name" content="aprild">
       <meta itemprop="description" content="programmer">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂人日记">
+      <meta itemprop="name" content="甘文崔">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -300,7 +383,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-18 14:29:02" itemprop="dateModified" datetime="2021-09-18T14:29:02+08:00">2021-09-18</time>
+                <time title="Modified: 2021-09-18 14:43:43" itemprop="dateModified" datetime="2021-09-18T14:43:43+08:00">2021-09-18</time>
               </span>
 
           <br>
@@ -345,90 +428,6 @@
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首先，ConcurrentHashMap他的并发度是更高的，我们知道就像普通的HashTable是直接对里面的方法加了一个对象锁，因为<span class="keyword">Synchronized</span>的机制，同一时刻只能有一个线程操作他，其他线程阻塞或者轮询等待，效率是比较低的，但是<span class="number">1.8</span>之后的ConcurrentHashMap同样变成了一个数组+链表+红黑树的一个结构，他采用了分段锁的技术，就是给容器上了很多的锁，然后每一把锁控制容器中的一部分数据，这样多个线程访问容器里不同部分的数据时，线程之间就不会发生锁的竞争，这样就可以有效的提高并发的访问效率</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-ConcurrentHashMap"><a href="#2-ConcurrentHashMap" class="headerlink" title="2.ConcurrentHashMap"></a>2.ConcurrentHashMap</h2><h2 id="3-ArrayList"><a href="#3-ArrayList" class="headerlink" title="3.ArrayList"></a>3.ArrayList</h2><h2 id="4-链表"><a href="#4-链表" class="headerlink" title="4.链表"></a>4.链表</h2><h2 id="5-堆栈"><a href="#5-堆栈" class="headerlink" title="5.堆栈"></a>5.堆栈</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Aprild">
-      <meta itemprop="description" content="programmer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狂人日记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/18/HashMap/" class="post-title-link" itemprop="url">HashMap</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-09-18 14:30:57 / Modified: 14:36:54" itemprop="dateCreated datePublished" datetime="2021-09-18T14:30:57+08:00">2021-09-18</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>946</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>HashMap是由数组和链表组成的，主干是Enery数组，每个Enery包含一个key-vlaue键值对。</p>
-<p>链表的存在主要是为了解决<strong>哈希冲突</strong>，如果多次操作经过哈希算法后落到同一个Entry的节点，那么就会在该节点形成链表。<strong>jdk8采用数组+链表+红黑树的数据结构，而jdk7之前采用数组+链表的数据结构。</strong></p>
-<p>如果定位到的Enrty节点（数组位置）不含链表，那么查找、添加操作就很快，仅需一次寻址即可。</p>
-<p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度仍然我**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
-<p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
-<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a>JDK8</h3><p>数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</p>
-<p>数据节点：原本的Entry节点也变成了一个Node节点</p>
-<p>数据插入方式：1.8数据插入的过程使用的是尾插法：尾插法线程安全吗？<br>尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</p>
-<h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a>JDK7</h3><p>数据结构：数组加链表</p>
-<p>数据节点：他的数据节点是一个Entry节点</p>
-<p>数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？<br>他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的Entry进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次get的时候出现一个死循环的情况。</p>
-<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><p>如果我们没有设置他的capacity(容量)，他的默认初始化容量是16，负载因子是0.75，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</p>
-
       
     </div>
 
@@ -501,7 +500,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Aprild</p>
+  <p class="site-author-name" itemprop="name">aprild</p>
   <div class="site-description" itemprop="description">programmer</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -551,7 +550,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Aprild</span>
+  <span class="author" itemprop="copyrightHolder">aprild</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>

@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="programmer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://example.com/categories/index.html">
+  <meta name="description" content="日常几个错误记录 IDEA自动生成代码后，主键为long类型，需要手动改为包装类型Long。long为基本类型，当创建对象是不给主键赋值会自动给默认值0l，Long类型默认为null，当我们不给值是可以结合雪花算法或者主键自增进行自动赋值。 用原生SQL时，需结合@Query直接，并且注解中nativeQuery参数要为ture，默认为false。false时需要sql书写符合jpa特定语法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JPA日常使用记录">
+<meta property="og:url" content="http://example.com/2022/07/31/JPA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="甘文崔">
-<meta property="og:description" content="programmer">
+<meta property="og:description" content="日常几个错误记录 IDEA自动生成代码后，主键为long类型，需要手动改为包装类型Long。long为基本类型，当创建对象是不给主键赋值会自动给默认值0l，Long类型默认为null，当我们不给值是可以结合雪花算法或者主键自增进行自动赋值。 用原生SQL时，需结合@Query直接，并且注解中nativeQuery参数要为ture，默认为false。false时需要sql书写符合jpa特定语法。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-14T02:26:50.000Z">
-<meta property="article:modified_time" content="2021-09-14T02:27:15.338Z">
+<meta property="article:published_time" content="2022-07-31T10:59:11.000Z">
+<meta property="article:modified_time" content="2022-07-31T11:09:02.019Z">
 <meta property="article:author" content="aprild">
 <meta property="article:tag" content="冲！">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/">
+<link rel="canonical" href="http://example.com/2022/07/31/JPA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -41,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>categories | 甘文崔
-</title>
+  <title>JPA日常使用记录 | 甘文崔</title>
   
 
 
@@ -160,51 +159,101 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="en">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/31/JPA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="aprild">
+      <meta itemprop="description" content="programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甘文崔">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JPA日常使用记录
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<div class="post-meta">
+              <time title="Created: 2022-07-31 18:59:11 / Modified: 19:09:02" itemprop="dateCreated datePublished" datetime="2022-07-31T18:59:11+08:00">2022-07-31</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>283</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ol>
+<li>日常几个错误记录<ol>
+<li>IDEA自动生成代码后，主键为long类型，需要手动改为包装类型Long。long为基本类型，当创建对象是不给主键赋值会自动给默认值0l，Long类型默认为null，当我们不给值是可以结合雪花算法或者主键自增进行自动赋值。</li>
+<li>用原生SQL时，需结合@Query直接，并且注解中nativeQuery参数要为ture，默认为false。false时需要sql书写符合jpa特定语法。</li>
+<li>当在Dao层，原声sql结合Pageable进行分页查询时，需要注意将countQuery参数赋值对应的count查询sql。如果该参数忘记，当每页个数小于等于总数时会报错。</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/31/demo/" rel="prev" title="demo">
+      <i class="fa fa-chevron-left"></i> demo
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              No categories
-            </div>
-            <div class="category-all">
-              
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>

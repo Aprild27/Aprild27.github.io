@@ -164,6 +164,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/10/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="aprild">
+      <meta itemprop="description" content="programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甘文崔">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/10/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Linux常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-10 15:44:13 / 修改时间：15:45:09" itemprop="dateCreated datePublished" datetime="2023-08-10T15:44:13+08:00">2023-08-10</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>显示所有已启动的服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-units  --type=service</span><br></pre></td></tr></table></figure>
+
+
+<p>Contos防火墙命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看防火墙状态</span></span><br><span class="line">systemctl status firewalld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启防火墙</span></span><br><span class="line">systemctl start firewalld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看开放的端口集合</span></span><br><span class="line">firewall-cmd --list-ports  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 开放某个端口</span></span><br><span class="line">firewall-cmd --permanent --zone=public --add-port=8080/tcp  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启防火墙</span></span><br><span class="line">systemctl reload firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><blockquote>
+<p>主要用来查找系统PATH目录下的可执行文件。<br>本质就是查找本地已经安装好的可直接执行的命令。<br>注意：</p>
+<ol>
+<li> 不需要关注在哪个目录下执行，which总会查找全局PATH下的可执行文件。</li>
+<li> 若可执行文件不在PATH下，也是无法被which查询到。</li>
+</ol>
+</blockquote>
+<h3 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h3><blockquote>
+<p>whereis用于查找二进制（命令）、源文件、man文件。<br>通过文件索引数据库而非PATH来查找。（与which不同之处）<br>同样不需要关注哪个路径下执行。</p>
+</blockquote>
+<p>将本地文件复制到目标机器：<br>scp  文件名 用户名@目标机器IP:目标机器路径</p>
+<p>将目标机器的文件复制到本地<br>scp 用户名@目标机器IP:目标机器文件名 本地路径       回车后输入密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/vm/drop_caches:表示清除pagecache。  </span><br><span class="line">echo 2 &gt; /proc/sys/vm/drop_caches:表示清除回收slab分配器中的对象（包括目录项缓存和inode缓存）。slab分配器是内核中管理内存的一种机制，其中很多缓存数据实现都是用的pagecache。  </span><br><span class="line">echo 3 &gt; /proc/sys/vm/drop_caches:表示清除pagecache和slab分配器中的缓存对象。</span><br></pre></td></tr></table></figure>
+
+<p>查看ip地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 外网</span></span><br><span class="line">curl -s http://ifconfig.me</span><br><span class="line"><span class="meta">#</span><span class="bash"> 内网</span></span><br><span class="line">ifconfig</span><br><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+<p>MV</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重命名</span></span><br><span class="line">mv 原文件名 修改后文件名</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -b：当目标文件存在时，先进行备份在覆盖</span></span><br><span class="line"> mv -b a/aa b/</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -f：当目标文件存在时，强制覆盖</span> </span><br><span class="line">mv -f a/aa b/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -i：默认选项，当目标文件存在时，提示是否覆盖</span></span><br><span class="line">mv -i a/aa b/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -t：先指定目标，在制定源</span></span><br><span class="line">mv -t b/ a/aa</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v：显示过程</span></span><br><span class="line">mv -fv a/aa b/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.彻底置空，也就是<span class="keyword">ls</span>文件的大小为0，文件里面什么都没有</span><br><span class="line">     （1）: &gt; filename</span><br><span class="line">     （2）<span class="literal">true</span> &gt; filename</span><br><span class="line">     （3）cat <span class="string">/dev/null</span> &gt; filename</span><br><span class="line">     （4）&gt; filename</span><br><span class="line"></span><br><span class="line">2.置空文件，但是文件中有空行，<span class="keyword">ls</span>文件的大小，显示还有大小</span><br><span class="line">    （1）<span class="keyword">echo</span> <span class="string">&quot;&quot;</span> &gt; filename</span><br><span class="line">    （2）<span class="keyword">echo</span> &gt; filename</span><br><span class="line"></span><br><span class="line">&gt; a.log</span><br><span class="line"><span class="comment"># 此时置空a.log文件，并不影响服务持续写入</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:端口号</span><br><span class="line"></span><br><span class="line">lsof -i:8080</span><br><span class="line"></span><br><span class="line">netstat -tunlp |grep 端口号</span><br><span class="line">netstat -tunlp |grep 8080</span><br><span class="line"><span class="deletion">-t (tcp) 仅显示tcp相关选项  </span></span><br><span class="line"><span class="deletion">-u (udp)仅显示udp相关选项  </span></span><br><span class="line"><span class="deletion">-n 拒绝显示别名，能显示数字的全部转化为数字  </span></span><br><span class="line"><span class="deletion">-l 仅列出在Listen(监听)的服务状态  </span></span><br><span class="line"><span class="deletion">-p 显示建立相关链接的程序名</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>netstat</strong><br><code>netstat -anp</code><br>    显示所有已开放端口<br><code>netstat -tunlp</code><br>    正在侦听的所有 TCP 或 UDP 端口，包括使用端口和套接字状态的服务<br>     root 或 sudo 用户身份运行命令<br>    -t – 显示 TCP 端口<br>    -u – 显示 UDP 端口<br>    -n – 显示数字地址而不是主机名<br>    -l – 仅显示侦听端口<br>    -p – 显示进程的 PID 和名称<br><code>netstat -tnlp | grep :80</code><br>    查询指定端口通过grep过滤<br>注：Proto – 套接字使用的协议。Local Address – 进程侦听的 IP 地址和端口号。PID/Program name – PID 和进程名称。</p>
+<p><strong>ss</strong><br>ss 是新的 netstat，命令选项大致相同。它缺少一些 netstat 功能，但暴露了更多的 TCP 状态，而且速度稍快。<br><code>ss -tunlp</code></p>
+<p><strong>lsof</strong><br>lsof 是一个功能强大的命令行实用程序，它提供有关进程打开的文件的信息。<br>在 Linux 中，一切都是文件，可以将套接字视为写入网络的文件。<br><code>lsof -nP -iTCP -sTCP:LISTEN</code><br>    获取所有侦听 TCP 端口的列表<br>    -n – 不要将端口号转换为端口名称<br>    -p – 不要解析主机名，显示数字地址<br>    -iTCP -sTCP:LISTEN – 仅显示 TCP 协议状态为 LISTEN 的网络文件<br><code>sudo lsof -nP -iTCP:3306 -sTCP:LISTEN</code><br>    查找正在侦听特定端口(3306)的进程</p>
+<h3 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h3><p>du -sh *</p>
+<h3 id="ls找不到"><a href="#ls找不到" class="headerlink" title="ls找不到"></a>ls找不到</h3><p>-bash: ls: command not found （PATH是否被改）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="built_in">export</span> PATH=/bin:/usr/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="环境变量相关的命令"><a href="#环境变量相关的命令" class="headerlink" title="环境变量相关的命令"></a>环境变量相关的命令</h3><ol>
+<li>echo:显示某个环境变量的值</li>
+<li>export:设置一个新的环境变量</li>
+<li>env:显示所有的环境变量</li>
+<li>unset：清除环境变量</li>
+<li>set：显示本地定义的shell环境和环境变量</li>
+</ol>
+<h3 id="常见的环境变量"><a href="#常见的环境变量" class="headerlink" title="常见的环境变量"></a>常见的环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/bin:/usr/bin</span><br><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line">/root</span><br><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line">/bin/bash</span><br><span class="line">[root@VM-20-16-centos ~] </span><br></pre></td></tr></table></figure>
+<ul>
+<li>PATH：指定命令的搜索路径</li>
+<li>HOME：指定用户的主工作目录（即用户登录到Linux系统中时的默认目录），每个用户的home环境变量都是不一样的</li>
+<li>SHELL:当前Shell。它的值通常是/bin/bash，</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/31/JPA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -782,7 +906,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -826,7 +950,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -835,12 +959,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5 分钟</span>
+    <span title="站点阅读时长">7 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -187,9 +187,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-08-10 15:44:13 / 修改时间：15:45:09" itemprop="dateCreated datePublished" datetime="2023-08-10T15:44:13+08:00">2023-08-10</time>
+              <time title="创建时间：2023-08-10 15:44:13" itemprop="dateCreated datePublished" datetime="2023-08-10T15:44:13+08:00">2023-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-21 17:22:48" itemprop="dateModified" datetime="2023-08-21T17:22:48+08:00">2023-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
             </span>
 
           <br>
@@ -219,57 +234,14 @@
       
           <p>显示所有已启动的服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-units  --type=service</span><br></pre></td></tr></table></figure>
-
-
-<p>Contos防火墙命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看防火墙状态</span></span><br><span class="line">systemctl status firewalld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启防火墙</span></span><br><span class="line">systemctl start firewalld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看开放的端口集合</span></span><br><span class="line">firewall-cmd --list-ports  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 开放某个端口</span></span><br><span class="line">firewall-cmd --permanent --zone=public --add-port=8080/tcp  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启防火墙</span></span><br><span class="line">systemctl reload firewalld</span><br></pre></td></tr></table></figure>
-
-<h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><blockquote>
-<p>主要用来查找系统PATH目录下的可执行文件。<br>本质就是查找本地已经安装好的可直接执行的命令。<br>注意：</p>
-<ol>
-<li> 不需要关注在哪个目录下执行，which总会查找全局PATH下的可执行文件。</li>
-<li> 若可执行文件不在PATH下，也是无法被which查询到。</li>
-</ol>
-</blockquote>
-<h3 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h3><blockquote>
-<p>whereis用于查找二进制（命令）、源文件、man文件。<br>通过文件索引数据库而非PATH来查找。（与which不同之处）<br>同样不需要关注哪个路径下执行。</p>
-</blockquote>
-<p>将本地文件复制到目标机器：<br>scp  文件名 用户名@目标机器IP:目标机器路径</p>
-<p>将目标机器的文件复制到本地<br>scp 用户名@目标机器IP:目标机器文件名 本地路径       回车后输入密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/vm/drop_caches:表示清除pagecache。  </span><br><span class="line">echo 2 &gt; /proc/sys/vm/drop_caches:表示清除回收slab分配器中的对象（包括目录项缓存和inode缓存）。slab分配器是内核中管理内存的一种机制，其中很多缓存数据实现都是用的pagecache。  </span><br><span class="line">echo 3 &gt; /proc/sys/vm/drop_caches:表示清除pagecache和slab分配器中的缓存对象。</span><br></pre></td></tr></table></figure>
-
-<p>查看ip地址</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 外网</span></span><br><span class="line">curl -s http://ifconfig.me</span><br><span class="line"><span class="meta">#</span><span class="bash"> 内网</span></span><br><span class="line">ifconfig</span><br><span class="line">ip addr</span><br></pre></td></tr></table></figure>
-
-<p>MV</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重命名</span></span><br><span class="line">mv 原文件名 修改后文件名</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -b：当目标文件存在时，先进行备份在覆盖</span></span><br><span class="line"> mv -b a/aa b/</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -f：当目标文件存在时，强制覆盖</span> </span><br><span class="line">mv -f a/aa b/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -i：默认选项，当目标文件存在时，提示是否覆盖</span></span><br><span class="line">mv -i a/aa b/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -t：先指定目标，在制定源</span></span><br><span class="line">mv -t b/ a/aa</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">-v：显示过程</span></span><br><span class="line">mv -fv a/aa b/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.彻底置空，也就是<span class="keyword">ls</span>文件的大小为0，文件里面什么都没有</span><br><span class="line">     （1）: &gt; filename</span><br><span class="line">     （2）<span class="literal">true</span> &gt; filename</span><br><span class="line">     （3）cat <span class="string">/dev/null</span> &gt; filename</span><br><span class="line">     （4）&gt; filename</span><br><span class="line"></span><br><span class="line">2.置空文件，但是文件中有空行，<span class="keyword">ls</span>文件的大小，显示还有大小</span><br><span class="line">    （1）<span class="keyword">echo</span> <span class="string">&quot;&quot;</span> &gt; filename</span><br><span class="line">    （2）<span class="keyword">echo</span> &gt; filename</span><br><span class="line"></span><br><span class="line">&gt; a.log</span><br><span class="line"><span class="comment"># 此时置空a.log文件，并不影响服务持续写入</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:端口号</span><br><span class="line"></span><br><span class="line">lsof -i:8080</span><br><span class="line"></span><br><span class="line">netstat -tunlp |grep 端口号</span><br><span class="line">netstat -tunlp |grep 8080</span><br><span class="line"><span class="deletion">-t (tcp) 仅显示tcp相关选项  </span></span><br><span class="line"><span class="deletion">-u (udp)仅显示udp相关选项  </span></span><br><span class="line"><span class="deletion">-n 拒绝显示别名，能显示数字的全部转化为数字  </span></span><br><span class="line"><span class="deletion">-l 仅列出在Listen(监听)的服务状态  </span></span><br><span class="line"><span class="deletion">-p 显示建立相关链接的程序名</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>netstat</strong><br><code>netstat -anp</code><br>    显示所有已开放端口<br><code>netstat -tunlp</code><br>    正在侦听的所有 TCP 或 UDP 端口，包括使用端口和套接字状态的服务<br>     root 或 sudo 用户身份运行命令<br>    -t – 显示 TCP 端口<br>    -u – 显示 UDP 端口<br>    -n – 显示数字地址而不是主机名<br>    -l – 仅显示侦听端口<br>    -p – 显示进程的 PID 和名称<br><code>netstat -tnlp | grep :80</code><br>    查询指定端口通过grep过滤<br>注：Proto – 套接字使用的协议。Local Address – 进程侦听的 IP 地址和端口号。PID/Program name – PID 和进程名称。</p>
-<p><strong>ss</strong><br>ss 是新的 netstat，命令选项大致相同。它缺少一些 netstat 功能，但暴露了更多的 TCP 状态，而且速度稍快。<br><code>ss -tunlp</code></p>
-<p><strong>lsof</strong><br>lsof 是一个功能强大的命令行实用程序，它提供有关进程打开的文件的信息。<br>在 Linux 中，一切都是文件，可以将套接字视为写入网络的文件。<br><code>lsof -nP -iTCP -sTCP:LISTEN</code><br>    获取所有侦听 TCP 端口的列表<br>    -n – 不要将端口号转换为端口名称<br>    -p – 不要解析主机名，显示数字地址<br>    -iTCP -sTCP:LISTEN – 仅显示 TCP 协议状态为 LISTEN 的网络文件<br><code>sudo lsof -nP -iTCP:3306 -sTCP:LISTEN</code><br>    查找正在侦听特定端口(3306)的进程</p>
-<h3 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h3><p>du -sh *</p>
-<h3 id="ls找不到"><a href="#ls找不到" class="headerlink" title="ls找不到"></a>ls找不到</h3><p>-bash: ls: command not found （PATH是否被改）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="built_in">export</span> PATH=/bin:/usr/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="环境变量相关的命令"><a href="#环境变量相关的命令" class="headerlink" title="环境变量相关的命令"></a>环境变量相关的命令</h3><ol>
-<li>echo:显示某个环境变量的值</li>
-<li>export:设置一个新的环境变量</li>
-<li>env:显示所有的环境变量</li>
-<li>unset：清除环境变量</li>
-<li>set：显示本地定义的shell环境和环境变量</li>
-</ol>
-<h3 id="常见的环境变量"><a href="#常见的环境变量" class="headerlink" title="常见的环境变量"></a>常见的环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$PATH</span></span><br><span class="line">/bin:/usr/bin</span><br><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line">/root</span><br><span class="line">[root@VM-20-16-centos ~] <span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line">/bin/bash</span><br><span class="line">[root@VM-20-16-centos ~] </span><br></pre></td></tr></table></figure>
-<ul>
-<li>PATH：指定命令的搜索路径</li>
-<li>HOME：指定用户的主工作目录（即用户登录到Linux系统中时的默认目录），每个用户的home环境变量都是不一样的</li>
-<li>SHELL:当前Shell。它的值通常是/bin/bash，</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/10/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -311,10 +283,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-07-31 18:59:11 / 修改时间：19:21:22" itemprop="dateCreated datePublished" datetime="2022-07-31T18:59:11+08:00">2022-07-31</time>
+              <time title="创建时间：2022-07-31 18:59:11" itemprop="dateCreated datePublished" datetime="2022-07-31T18:59:11+08:00">2022-07-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-21 16:39:29" itemprop="dateModified" datetime="2023-08-21T16:39:29+08:00">2023-08-21</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -349,7 +327,14 @@
 </ol>
 </li>
 </ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/07/31/JPA%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -464,10 +449,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-23 21:31:58 / 修改时间：21:36:12" itemprop="dateCreated datePublished" datetime="2021-09-23T21:31:58+08:00">2021-09-23</time>
+              <time title="创建时间：2021-09-23 21:31:58" itemprop="dateCreated datePublished" datetime="2021-09-23T21:31:58+08:00">2021-09-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-21 16:40:58" itemprop="dateModified" datetime="2023-08-21T16:40:58+08:00">2023-08-21</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -503,39 +494,19 @@
 </ul>
 <h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><p>（HR会打印你的简历，用于在面试的时候联系，所以联系方式放到最上边会比较方便）</p>
 <ul>
-<li>手机：135…. （如果是外地手机，可注明。如经常关机，要写上最优联系时间）</li>
-<li>Email：<a href="mailto:&#103;&#x6f;&#x6f;&#x64;&#109;&#x61;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x6f;&#x6f;&#x64;&#109;&#x61;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a> （虽然我觉得QQ邮箱无所谓，不过有些技术人员比较反感，建议用G，非要用的话，不要用数字邮箱名）</li>
-<li>QQ/微信号：6…（提供一个通过网络可以联系到你的方式）</li>
-</ul>
-<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><p>（工作经历按逆序排列，最新的在最前边，按公司做一级分组，公司内按二级分组）</p>
-<h2 id="ABC公司-（-2012年9月-2014年9月-）"><a href="#ABC公司-（-2012年9月-2014年9月-）" class="headerlink" title="ABC公司 （ 2012年9月 ~ 2014年9月 ）"></a>ABC公司 （ 2012年9月 ~ 2014年9月 ）</h2><h3 id="DEF项目"><a href="#DEF项目" class="headerlink" title="DEF项目"></a>DEF项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="GHI项目"><a href="#GHI项目" class="headerlink" title="GHI项目"></a>GHI项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="其他项目"><a href="#其他项目" class="headerlink" title="其他项目"></a>其他项目</h3><p>（每个公司写2~3个核心项目就好了，如果你有非常大量的项目，那么按分类进行合并，每一类选一个典型写出来。其他的一笔带过即可。）</p>
-<h2 id="JKL公司-（-2010年3月-2012年8月-）"><a href="#JKL公司-（-2010年3月-2012年8月-）" class="headerlink" title="JKL公司 （ 2010年3月 ~ 2012年8月 ）"></a>JKL公司 （ 2010年3月 ~ 2012年8月 ）</h2><h3 id="MNO项目"><a href="#MNO项目" class="headerlink" title="MNO项目"></a>MNO项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="PQR项目"><a href="#PQR项目" class="headerlink" title="PQR项目"></a>PQR项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="其他项目-1"><a href="#其他项目-1" class="headerlink" title="其他项目"></a>其他项目</h3><p>（每个公司写2~3个核心项目就好了，如果你有非常大量的项目，那么按分类进行合并，每一类选一个典型写出来。其他的一笔带过即可。）</p>
-<h1 id="工作经历-1"><a href="#工作经历-1" class="headerlink" title="工作经历"></a>工作经历</h1><p>（工作经历按逆序排列，最新的在最前边，按公司做一级分组，公司内按二级分组）</p>
-<h2 id="ABC公司-（-2012年9月-2014年9月-）-1"><a href="#ABC公司-（-2012年9月-2014年9月-）-1" class="headerlink" title="ABC公司 （ 2012年9月 ~ 2014年9月 ）"></a>ABC公司 （ 2012年9月 ~ 2014年9月 ）</h2><h3 id="DEF项目-1"><a href="#DEF项目-1" class="headerlink" title="DEF项目"></a>DEF项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="GHI项目-1"><a href="#GHI项目-1" class="headerlink" title="GHI项目"></a>GHI项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="其他项目-2"><a href="#其他项目-2" class="headerlink" title="其他项目"></a>其他项目</h3><p>（每个公司写2~3个核心项目就好了，如果你有非常大量的项目，那么按分类进行合并，每一类选一个典型写出来。其他的一笔带过即可。）</p>
-<h2 id="JKL公司-（-2010年3月-2012年8月-）-1"><a href="#JKL公司-（-2010年3月-2012年8月-）-1" class="headerlink" title="JKL公司 （ 2010年3月 ~ 2012年8月 ）"></a>JKL公司 （ 2010年3月 ~ 2012年8月 ）</h2><h3 id="MNO项目-1"><a href="#MNO项目-1" class="headerlink" title="MNO项目"></a>MNO项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="PQR项目-1"><a href="#PQR项目-1" class="headerlink" title="PQR项目"></a>PQR项目</h3><p>我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。</p>
-<h3 id="其他项目-3"><a href="#其他项目-3" class="headerlink" title="其他项目"></a>其他项目</h3><p>（每个公司写2~3个核心项目就好了，如果你有非常大量的项目，那么按分类进行合并，每一类选一个典型写出来。其他的一笔带过即可。）</p>
-<h1 id="技能清单"><a href="#技能清单" class="headerlink" title="技能清单"></a>技能清单</h1><p>（我一般主张将技能清单写入到工作经历里边去。不过很难完整，所以有这么一段也不错）</p>
-<p>以下均为我熟练使用的技能</p>
-<ul>
-<li>Web开发：PHP/Hack/Node</li>
-<li>Web框架：ThinkPHP/Yaf/Yii/Lavarel/LazyPHP</li>
-<li>前端框架：Bootstrap/AngularJS/EmberJS/HTML5/Cocos2dJS/ionic</li>
-<li>前端工具：Bower/Gulp/SaSS/LeSS/PhoneGap</li>
-<li>数据库相关：MySQL/PgSQL/PDO/SQLite</li>
-<li>版本管理、文档和自动化部署工具：Svn/Git/PHPDoc/Phing/Composer</li>
-<li>单元测试：PHPUnit/SimpleTest/Qunit</li>
-<li>云和开放平台：SAE/BAE/AWS/微博开放平台/微信应用开发</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改完后导出PDF即可</span><br><span class="line">转载--冷熊简历模板：http:<span class="regexp">//</span>cv.ftqq.com/?fr=github<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-
+<li><p>手机：135…. （如果是外地手机，可注明。如经常关机，要写上最优联系时间）</p>
+</li>
+<li><p>Email：<a href="mailto:&#103;&#x6f;&#111;&#x64;&#109;&#97;&#x6e;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x6f;&#111;&#x64;&#109;&#97;&#x6e;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a> （虽然我觉得QQ邮箱无所谓，不过有些技术人员比较反感，建议用G，非要用的话，不要用数字邮箱名）</p>
+</li>
+<li><p>QQ/微信号：6…（提供一个通过网络可以联系到你的方式）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/23/Markdown%E5%86%99%E7%AE%80%E5%8E%86%E6%A8%A1%E6%9D%BF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -585,7 +556,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-31 19:22:43" itemprop="dateModified" datetime="2022-07-31T19:22:43+08:00">2022-07-31</time>
+                <time title="修改时间：2023-08-21 16:38:58" itemprop="dateModified" datetime="2023-08-21T16:38:58+08:00">2023-08-21</time>
               </span>
 
           <br>
@@ -618,14 +589,14 @@
 <p>如果定位到的Enrty节点（数组位置）不含链表，那么查找、添加操作就很快，仅需一次寻址即可。</p>
 <p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度为**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
 <p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
-<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a>JDK8</h3><p>数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</p>
-<p>数据节点：原本的Entry节点也变成了一个Node节点</p>
-<p>数据插入方式：1.8数据插入的过程使用的是尾插法：尾插法线程安全吗？<br>尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</p>
-<h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a>JDK7</h3><p>数据结构：数组加链表</p>
-<p>数据节点：他的数据节点是一个Entry节点</p>
-<p>数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？<br>他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的Entry进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次get的时候出现一个死循环的情况。</p>
-<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h3><p>如果我们没有设置他的capacity(容量)，他的默认初始化容量是16，负载因子是0.75，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/18/HashMap/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -675,8 +646,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-31 19:32:31" itemprop="dateModified" datetime="2022-07-31T19:32:31+08:00">2022-07-31</time>
+                <time title="修改时间：2023-08-21 17:08:41" itemprop="dateModified" datetime="2023-08-21T17:08:41+08:00">2023-08-21</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -706,33 +686,16 @@
           <h1 id="一：准备工具"><a href="#一：准备工具" class="headerlink" title="一：准备工具"></a>一：准备工具</h1><p>所需工具：</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git、hexo、<span class="keyword">node</span><span class="title">、npm</span></span><br></pre></td></tr></table></figure>
 
-
-
 <h2 id="Hexo-常用命令"><a href="#Hexo-常用命令" class="headerlink" title="Hexo 常用命令"></a>Hexo 常用命令</h2><p><strong>初始化博客</strong></p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">init</span> 文件夹名称</span><br></pre></td></tr></table></figure>
-
-<p><strong>新建文章</strong></p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n 文章名称 /  hexo <span class="keyword">new</span> <span class="type"></span>文章名称</span><br></pre></td></tr></table></figure>
-
-<p><strong>生成静态资源</strong></p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g</span> </span><br></pre></td></tr></table></figure>
-
-<p><strong>在线预览/本地预览</strong></p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s / hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>一键部署</strong></p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d / hexo <span class="keyword">deploy</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>清除博客</strong></p>
-<p>​    每次更改博客内容后，先进行清楚后再进行本地预览或者一件部署</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clear</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>保姆级教程推荐羊哥视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1Yb411a7ty?spm_id_from=333.999.0.0</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/11/Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -782,7 +745,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-31 19:22:33" itemprop="dateModified" datetime="2022-07-31T19:22:33+08:00">2022-07-31</time>
+                <time title="修改时间：2023-08-21 16:37:08" itemprop="dateModified" datetime="2023-08-21T16:37:08+08:00">2023-08-21</time>
               </span>
 
           <br>
@@ -816,17 +779,14 @@
 <p>如果定位到的Entry节点包含链表，那么对应添加操作时间复杂度仍然我**o(1)**；对于查询来说，此时需要遍历链表，然后通过key的equals方法逐一对比查找，出于性能考虑，HashMap种的链表出现越少性能越好。</p>
 <p>基于hashing的原理，通过put和get存储和获取对象。当给put()方法传递键值时，先对键做一个hashCode()的计算来得到它在bucket数组中的位置来存储Entry对象。当获取对象时，通过get获取到bucket的位置，再通过键对象的equals()方法找到正确的键值对，然后在返回值对象。</p>
 <h3 id="JDK7"><a href="#JDK7" class="headerlink" title="JDK7"></a><strong>JDK7</strong></h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据结构：数组加链表</span><br><span class="line"></span><br><span class="line">数据节点：他的数据节点是一个<span class="meta">Entry</span>节点</span><br><span class="line"></span><br><span class="line">数据插入方式：他的数据插入过程是使用的是头插法：头插法会造成什么问题？</span><br><span class="line">他扩容的一个过程，里面有一个resize的方法，它又调用了一个transfer的方法，把里面的<span class="meta">Entry</span>进行了一个rehash，这个过程当中可能会造成链表的循环，可能在下一次<span class="meta">get</span>的时候出现一个死循环的情况。</span><br></pre></td></tr></table></figure>
-
-<h3 id="JDK8"><a href="#JDK8" class="headerlink" title="JDK8"></a><strong>JDK8</strong></h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据结构：把原本jdk7中的数组加链表的结构变成了一个数组加链表加红黑树的结构</span><br><span class="line"></span><br><span class="line">数据节点：原本的Entry节点也变成了一个<span class="keyword">Node</span><span class="title">节点</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">数据插入方式：1</span>.<span class="number">8</span>数据插入的过程使用的是尾插法：尾插法线程安全吗？</span><br><span class="line">尾插法也不是线程安全的，但是它因为是尾插法，并没有改变原本数据插入的顺序，所以在这不会出现链表循环这么一个过程</span><br></pre></td></tr></table></figure>
-
-<h3 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a><strong>扩容机制</strong></h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果我们没有设置他的<span class="built_in">capacity</span>(容量)，他的默认初始化容量是<span class="number">16</span>，负载因子是<span class="number">0.75</span>，扩容的时候他会计算出来扩容的阈值，put的时候会先判断这个size是不是大于这个阈值，如果大于这个阈值了，他就会新创建一个原本两倍大小的这么一个集合，然后将原来的Entry，进行一个resize这么一个过程</span><br></pre></td></tr></table></figure>
-
-<h3 id="怎么保证HashMap线程安全的"><a href="#怎么保证HashMap线程安全的" class="headerlink" title="怎么保证HashMap线程安全的"></a><strong>怎么保证HashMap线程安全的</strong></h3><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我一般会使用<span class="function"><span class="title">ConcurrentHashMap</span>(肯凯润特)这种线程安全的一个集合容器</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>线程安全的还有像HashTable，或者说给他加Synchronized(sei可弱耐ri的)，或者lock，或者用collection.Synchronized都可以对他进行一个同步的操作，为什么选择了ConcurrentHashMap？</strong></p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首先，ConcurrentHashMap他的并发度是更高的，我们知道就像普通的HashTable是直接对里面的方法加了一个对象锁，因为<span class="keyword">Synchronized</span>的机制，同一时刻只能有一个线程操作他，其他线程阻塞或者轮询等待，效率是比较低的，但是<span class="number">1.8</span>之后的ConcurrentHashMap同样变成了一个数组+链表+红黑树的一个结构，他采用了分段锁的技术，就是给容器上了很多的锁，然后每一把锁控制容器中的一部分数据，这样多个线程访问容器里不同部分的数据时，线程之间就不会发生锁的竞争，这样就可以有效的提高并发的访问效率</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-ConcurrentHashMap"><a href="#2-ConcurrentHashMap" class="headerlink" title="2.ConcurrentHashMap"></a>2.ConcurrentHashMap</h2><h2 id="3-ArrayList"><a href="#3-ArrayList" class="headerlink" title="3.ArrayList"></a>3.ArrayList</h2><h2 id="4-链表"><a href="#4-链表" class="headerlink" title="4.链表"></a>4.链表</h2><h2 id="5-堆栈"><a href="#5-堆栈" class="headerlink" title="5.堆栈"></a>5.堆栈</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/11/%E5%B8%B8%E7%94%A8%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -910,10 +870,14 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

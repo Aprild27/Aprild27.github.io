@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="日常几个错误记录 IDEA自动生成代码后，主键为long类型，需要手动改为包装类型Long。long为基本类型，当创建对象是不给主键赋值会自动给默认值0l，Long类型默认为null，当我们不给值是可以结合雪花算法或者主键自增进行自动赋值。 用原生SQL时，需结合@Query直接，并且注解中nativeQuery参数要为ture，默认为false。false时需要sql书写符合jpa特定语法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-31T10:59:11.000Z">
-<meta property="article:modified_time" content="2022-07-31T11:21:22.928Z">
+<meta property="article:modified_time" content="2023-08-21T08:39:29.083Z">
 <meta property="article:author" content="aprild">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -189,10 +189,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-07-31 18:59:11 / 修改时间：19:21:22" itemprop="dateCreated datePublished" datetime="2022-07-31T18:59:11+08:00">2022-07-31</time>
+              <time title="创建时间：2022-07-31 18:59:11" itemprop="dateCreated datePublished" datetime="2022-07-31T18:59:11+08:00">2022-07-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-21 16:39:29" itemprop="dateModified" datetime="2023-08-21T16:39:29+08:00">2023-08-21</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -227,6 +233,7 @@
 </ol>
 </li>
 </ol>
+<span id="more"></span>
 
     </div>
 
@@ -326,10 +333,14 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
